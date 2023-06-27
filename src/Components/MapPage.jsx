@@ -1,8 +1,7 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
-// const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-const Map = () => {
+const MapPage = () => {
   const defaultProps = {
     center: {
       lat: 12.971599,
@@ -23,4 +22,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default MapPage;
