@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { Select } from "antd";
 import { City } from "country-state-city";
+// import { BsFillFlagFill } from "react-icons/bs";
 
 const containerStyle = {
   width: "100%",
@@ -25,9 +26,7 @@ const MapPage = () => {
     lng: longitude,
   };
 
-  const markers = [
-    { lat: latitude, lng: longitude, areaName: "Electronic City" },
-  ];
+  const markers = [{ lat: latitude, lng: longitude }];
   return (
     <div>
       <div
@@ -60,13 +59,13 @@ const MapPage = () => {
             center={center}
             zoom={13}
           >
-            {markers.map((marker, i) => (
-              <Marker
-                key={i}
-                position={marker}
-                noClustererRedraw={marker.areaName}
-              />
-            ))}
+            {markers.map((marker, i) => {
+              return (
+                <Marker key={i} position={marker}>
+                  Hello
+                </Marker>
+              );
+            })}
           </GoogleMap>
         </LoadScript>
       </div>
