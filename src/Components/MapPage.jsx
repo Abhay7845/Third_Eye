@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
-// import { Marker } from "google-maps-react";
+import { City } from "country-state-city";
+import { Select } from "antd";
+
 const MapPage = () => {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
@@ -19,17 +21,43 @@ const MapPage = () => {
     },
   };
 
-  console.log("YourLocation==>", YourLocation);
+  const GelAllCities = City.getAllCities();
+  console.log("GelAllCities==>", GelAllCities);
 
   return (
-    <div
-      style={{ height: "70vh", width: "50%", margin: "auto", marginTop: "4%" }}
-    >
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyDxfHQ1CQuqCCo-D48I2o9pdf96IqqyriI" }}
-        center={YourLocation.center}
-        zoom={11}
-      />
+    <div>
+      <div
+        style={{
+          width: "90%",
+          margin: "auto",
+        }}
+        className="my-2"
+      >
+        <Select showSearch className="w-100" placeholder="Choose Your Location">
+          {GelAllCities.map((item, i) => {
+            return (
+              <Select.Option key={i} value={item.name}>
+                {item.name}
+              </Select.Option>
+            );
+          })}
+        </Select>
+      </div>
+      <div
+        style={{
+          height: "80vh",
+          width: "90%",
+          margin: "auto",
+        }}
+      >
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: "AIzaSyDxfHQ1CQuqCCo-D48I2o9pdf96IqqyriI",
+          }}
+          center={YourLocation.center}
+          zoom={13}
+        />
+      </div>
     </div>
   );
 };
