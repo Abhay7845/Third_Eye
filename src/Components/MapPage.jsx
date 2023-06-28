@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
-import GoogleMapReact from "google-map-react";
-import { City } from "country-state-city";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { Select } from "antd";
+import { City } from "country-state-city";
+
+const containerStyle = {
+  width: "100%",
+  height: "80vh",
+};
 
 const MapPage = () => {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
+  const GelAllCities = City.getAllCities();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -14,16 +20,14 @@ const MapPage = () => {
     });
   }, [latitude, longitude]);
 
-  const YourLocation = {
-    center: {
-      lat: latitude,
-      lng: longitude,
-    },
+  const center = {
+    lat: latitude,
+    lng: longitude,
   };
 
-  const GelAllCities = City.getAllCities();
-  console.log("GelAllCities==>", GelAllCities);
-
+  const markers = [
+    { lat: latitude, lng: longitude, areaName: "Electronic City" },
+  ];
   return (
     <div>
       <div
@@ -50,13 +54,21 @@ const MapPage = () => {
           margin: "auto",
         }}
       >
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: "AIzaSyDxfHQ1CQuqCCo-D48I2o9pdf96IqqyriI",
-          }}
-          center={YourLocation.center}
-          zoom={13}
-        />
+        <LoadScript googleMapsApiKey="AIzaSyDxfHQ1CQuqCCo-D48I2o9pdf96IqqyriI">
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={13}
+          >
+            {markers.map((marker, i) => (
+              <Marker
+                key={i}
+                position={marker}
+                noClustererRedraw={marker.areaName}
+              />
+            ))}
+          </GoogleMap>
+        </LoadScript>
       </div>
     </div>
   );
