@@ -12,11 +12,11 @@ import { ChartData } from "../Data/DataList";
 const Home = () => {
   return (
     <>
-      <h4 className="text-center mt-2">Company Data Last 5 Years</h4>
+      <h4 className="text-center mt-2">Company Last 5 Years Performance</h4>
       <ResponsiveContainer aspect={3} width="95%">
         <LineChart data={ChartData}>
           <XAxis dataKey="year" />
-          <Line type="monotone" dataKey="number" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="turnover" activeDot={{ r: 8 }} />
           <Tooltip />
           <YAxis />
         </LineChart>

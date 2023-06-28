@@ -11,7 +11,7 @@ const MapPage = () => {
 
   return (
     <div
-      style={{ height: "60vh", width: "50%", margin: "auto", marginTop: "5%" }}
+      style={{ height: "70vh", width: "50%", margin: "auto", marginTop: "4%" }}
     >
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyDxfHQ1CQuqCCo-D48I2o9pdf96IqqyriI" }}
