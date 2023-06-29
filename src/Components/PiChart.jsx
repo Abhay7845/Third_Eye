@@ -34,7 +34,7 @@ const PiChart = () => {
 
   return (
     <>
-      <div className="mt-5">
+      <div className="mt-2">
         <h4 className="text-center my-2 text-danger">PI Chart Information</h4>
         <h5 className="text-center mt-2">Company Last 5 Years Performance</h5>
         <ResponsiveContainer aspect={3} width="95%">
