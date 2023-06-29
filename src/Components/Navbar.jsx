@@ -7,8 +7,14 @@ const Navbar = () => {
       <div className="container-fluid">
         <b className="navbar-brand">THIRD EYE</b>
         <div className="d-flex">
-          <Link to="/chart" className="mx-2">
-            CHART
+          <Link to="/lineChart" className="mx-2">
+            LINE CHART
+          </Link>
+          <Link to="/barChart" className="mx-2">
+            BAR CHART
+          </Link>
+          <Link to="/piChart" className="mx-2">
+            PI CHART
           </Link>
           <Link to="/map">MAP</Link>
         </div>
