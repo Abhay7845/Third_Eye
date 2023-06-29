@@ -17,7 +17,33 @@ import {
 import { data } from "../Data/DataList";
 
 const Home = () => {
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const COLORS = ["blue", "green"];
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   return (
     <>
@@ -64,7 +90,7 @@ const Home = () => {
         <h6 className="text-center">- Data Showing IN YEAR -</h6>
       </div>
       <div className="mt-5">
-        <h4 className="text-center my-2 text-danger">Bar Chart Information</h4>
+        <h4 className="text-center my-2 text-danger">PI Chart Information</h4>
         <h5 className="text-center mt-2">Company Last 5 Years Performance</h5>
         <ResponsiveContainer aspect={3} width="95%">
           <PieChart width={400} height={400}>
@@ -73,8 +99,8 @@ const Home = () => {
               cx="50%"
               cy="50%"
               labelLine={false}
-              // label={renderCustomizedLabel}
-              outerRadius={80}
+              label={renderCustomizedLabel}
+              outerRadius={180}
               fill="#8884d8"
               dataKey="turnover"
             >
@@ -85,6 +111,7 @@ const Home = () => {
                 />
               ))}
             </Pie>
+            <Tooltip />
           </PieChart>
         </ResponsiveContainer>
 
