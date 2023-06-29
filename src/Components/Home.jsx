@@ -1,16 +1,17 @@
 import React from "react";
 import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
   ResponsiveContainer,
   LineChart,
   Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  BarChart,
-  Bar,
-  CartesianGrid,
 } from "recharts";
-import { ChartData } from "../Data/DataList";
+import { data } from "../Data/DataList";
 
 const Home = () => {
   return (
@@ -19,9 +20,22 @@ const Home = () => {
         <h4 className="text-center my-2 text-danger">Line Chart Information</h4>
         <h5 className="text-center mt-2">Company Last 5 Years Performance</h5>
         <ResponsiveContainer aspect={3} width="95%">
-          <LineChart data={ChartData}>
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="year" />
-            <Line type="monotone" dataKey="turnover" activeDot={{ r: 8 }} />
+            <Line
+              type="monotone"
+              dataKey="turnover"
+              activeDot={{ r: 8 }}
+              stroke="blue"
+            />
+            <Line
+              type="monotone"
+              dataKey="profit"
+              activeDot={{ r: 8 }}
+              stroke="green"
+            />
+            <Legend />
             <Tooltip />
             <YAxis />
           </LineChart>
@@ -32,26 +46,14 @@ const Home = () => {
         <h4 className="text-center my-2 text-danger">Bar Chart Information</h4>
         <h5 className="text-center mt-2">Company Last 5 Years Performance</h5>
         <ResponsiveContainer aspect={3} width="95%">
-          <BarChart data={ChartData}>
-            <Bar dataKey="turnover" fill="blue" />
-            <CartesianGrid stroke="#ccc" />
+          <BarChart width={500} height={300} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="year" />
-            <Tooltip />
             <YAxis />
-          </BarChart>
-        </ResponsiveContainer>
-        <h6 className="text-center">- Data Showing IN YEAR -</h6>
-      </div>
-      <div className="mt-5">
-        <h4 className="text-center my-2 text-danger">PI Chart Information</h4>
-        <h5 className="text-center mt-2">Company Last 5 Years Performance</h5>
-        <ResponsiveContainer aspect={3} width="95%">
-          <BarChart data={ChartData}>
+            <Tooltip />
+            <Legend />
             <Bar dataKey="turnover" fill="blue" />
-            <CartesianGrid stroke="#ccc" />
-            <XAxis dataKey="year" />
-            <Tooltip />
-            <YAxis />
+            <Bar dataKey="profit" fill="green" />
           </BarChart>
         </ResponsiveContainer>
         <h6 className="text-center">- Data Showing IN YEAR -</h6>
