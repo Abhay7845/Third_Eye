@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { Select } from "antd";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { City } from "country-state-city";
 // import { BsFillFlagFill } from "react-icons/bs";
 
@@ -12,7 +12,14 @@ const containerStyle = {
 const MapPage = () => {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
-  const GelAllCities = City.getAllCities();
+  const [cityLatitude, setCityLatitude] = useState("");
+  const [cityLongitude, setCityLongitude] = useState("");
+  const [cityLocation, setCityLocation] = useState("");
+  const GetAllCities = City.getCitiesOfCountry("IN");
+  console.log("cityLatitude==>", typeof cityLatitude, cityLatitude);
+
+  const CityName = GetAllCities.filter((item) => item.name === cityLocation);
+  console.log("CityName==>", CityName);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -21,12 +28,20 @@ const MapPage = () => {
     });
   }, [latitude, longitude]);
 
-  const center = {
-    lat: latitude,
-    lng: longitude,
-  };
+  useEffect(() => {
+    CityName.find((position) => {
+      setCityLatitude(position.latitude);
+      setCityLongitude(position.longitude);
+    });
+  }, [cityLatitude, cityLongitude, CityName]);
 
+  const center = {
+    lat: !Number(cityLatitude) ? latitude : Number(cityLatitude),
+    lng: !Number(cityLongitude) ? longitude : Number(cityLongitude),
+  };
+  console.log("center==>", center);
   const markers = [{ lat: latitude, lng: longitude }];
+
   return (
     <div>
       <div
@@ -36,8 +51,13 @@ const MapPage = () => {
         }}
         className="my-2"
       >
-        <Select showSearch className="w-100" placeholder="Choose Your Location">
-          {GelAllCities.map((item, i) => {
+        <Select
+          showSearch
+          className="w-100"
+          placeholder="Choose Your Location"
+          onChange={(value) => setCityLocation(value)}
+        >
+          {GetAllCities.map((item, i) => {
             return (
               <Select.Option key={i} value={item.name}>
                 {item.name}
@@ -61,7 +81,7 @@ const MapPage = () => {
           >
             {markers.map((marker, i) => {
               return (
-                <Marker key={i} position={marker}>
+                <Marker key={i} position={marker} style={{ zIndex: "1" }}>
                   Hello
                 </Marker>
               );
