@@ -8,7 +8,7 @@ const MapPage = () => {
   const [location, setLocation] = useState("");
   const GetLocation = City.getCitiesOfCountry("IN");
   console.log("location==>", location);
-  const center = [23.921775384134516, 78.15758691262324];
+  const center = [12.925683599374741, 77.58827189641126];
 
   return (
     <div className="mx-4">
@@ -30,7 +30,7 @@ const MapPage = () => {
       </div>
       <MapContainer
         center={center}
-        zoom={4}
+        zoom={9}
         style={{ width: "100%", height: "90vh" }}
       >
         <TileLayer
@@ -47,27 +47,6 @@ const MapPage = () => {
             dashArray: 3,
             color: "red",
           }}
-          // eventHandlers={{
-          //   mouseover: (e) => {
-          //     const layer = e.target;
-          //     layer.setStyle({
-          //       dashArray: "",
-          //       fillOpacity: 0.7,
-          //       weight: 2,
-          //       opacity: 1,
-          //       color: "red",
-          //     });
-          //   },
-          //   mouseout: (e) => {
-          //     const layer = e.target;
-          //     layer.setStyle({
-          //       fillOpacity: 0.7,
-          //       weight: 2,
-          //       dashArray: "3",
-          //       color: "red",
-          //     });
-          //   },
-          // }}
         />
       </MapContainer>
     </div>
