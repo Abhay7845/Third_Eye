@@ -1,95 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { Select } from "antd";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { City } from "country-state-city";
-// import { BsFillFlagFill } from "react-icons/bs";
-
-const containerStyle = {
-  width: "100%",
-  height: "80vh",
-};
+import React from "react";
+import { MapContainer, TileLayer, Polygon } from "react-leaflet";
+import { coordinates } from "../Data/CountryCoordinates";
 
 const MapPage = () => {
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
-  const [cityLatitude, setCityLatitude] = useState("");
-  const [cityLongitude, setCityLongitude] = useState("");
-  const [cityLocation, setCityLocation] = useState("");
-  const GetAllCities = City.getCitiesOfCountry("IN");
-  console.log("cityLatitude==>", typeof cityLatitude, cityLatitude);
-
-  const CityName = GetAllCities.filter((item) => item.name === cityLocation);
-  console.log("CityName==>", CityName);
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    });
-  }, [latitude, longitude]);
-
-  useEffect(() => {
-    CityName.find((position) => {
-      setCityLatitude(position.latitude);
-      setCityLongitude(position.longitude);
-    });
-  }, [cityLatitude, cityLongitude, CityName]);
-
-  const center = {
-    lat: !Number(cityLatitude) ? latitude : Number(cityLatitude),
-    lng: !Number(cityLongitude) ? longitude : Number(cityLongitude),
-  };
-  console.log("center==>", center);
-  const markers = [{ lat: latitude, lng: longitude }];
-
+  const center = [12.991261136316723, 77.60475139166053];
   return (
-    <div>
-      <div
-        style={{
-          width: "90%",
-          margin: "auto",
+    <MapContainer
+      center={center}
+      zoom={4}
+      style={{ width: "100%", height: "90vh" }}
+    >
+      <TileLayer
+        url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=yWf5XdnBxBRhEaDUGS2n"
+        attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+      />
+
+      <Polygon
+        positions={coordinates}
+        pathOptions={{
+          fillColor: "#FD8D3C",
+          fillOpacity: 0.7,
+          weight: 2,
+          opacity: 1,
+          dashArray: 3,
+          color: "white",
         }}
-        className="my-2"
-      >
-        <Select
-          showSearch
-          className="w-100"
-          placeholder="Choose Your Location"
-          onChange={(value) => setCityLocation(value)}
-        >
-          {GetAllCities.map((item, i) => {
-            return (
-              <Select.Option key={i} value={item.name}>
-                {item.name}
-              </Select.Option>
-            );
-          })}
-        </Select>
-      </div>
-      <div
-        style={{
-          height: "80vh",
-          width: "90%",
-          margin: "auto",
+        eventHandlers={{
+          mouseover: (e) => {
+            const layer = e.target;
+            layer.setStyle({
+              dashArray: "",
+              fillColor: "#BD0026",
+              fillOpacity: 0.7,
+              weight: 2,
+              opacity: 1,
+              color: "white",
+            });
+          },
+          mouseout: (e) => {
+            const layer = e.target;
+            layer.setStyle({
+              fillOpacity: 0.7,
+              weight: 2,
+              dashArray: "3",
+              color: "white",
+              fillColor: "#FD8D3C",
+            });
+          },
         }}
-      >
-        <LoadScript googleMapsApiKey="AIzaSyDxfHQ1CQuqCCo-D48I2o9pdf96IqqyriI">
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={13}
-          >
-            {markers.map((marker, i) => {
-              return (
-                <Marker key={i} position={marker} style={{ zIndex: "1" }}>
-                  Hello
-                </Marker>
-              );
-            })}
-          </GoogleMap>
-        </LoadScript>
-      </div>
-    </div>
+      />
+    </MapContainer>
   );
 };
 

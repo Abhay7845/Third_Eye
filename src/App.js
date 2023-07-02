@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar";
 import MapPage from "./Components/MapPage";
 import BarChar from "./Components/BarChart";
 import PiChart from "./Components/PiChart";
+import "leaflet/dist/leaflet.css";
 
 const App = () => {
   return (
