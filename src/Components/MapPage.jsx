@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Polygon } from "react-leaflet";
+import { MapContainer, TileLayer, Polygon, Marker } from "react-leaflet";
 import { coordinates } from "../Data/CountryCoordinates";
 import { Select } from "antd";
+import L from "leaflet";
 import { City } from "country-state-city";
 
 const MapPage = () => {
@@ -9,6 +10,13 @@ const MapPage = () => {
   const GetLocation = City.getCitiesOfCountry("IN");
   console.log("location==>", location);
   const center = [12.925683599374741, 77.58827189641126];
+
+  const markerIcon = new L.Icon({
+    iconUrl: require("../Img/Location.png"),
+    iconSize: [40, 40],
+    iconAnchor: [17, 46],
+    popupAnchor: [0, -46],
+  });
 
   return (
     <div className="mx-4">
@@ -47,6 +55,10 @@ const MapPage = () => {
             dashArray: 3,
             color: "red",
           }}
+        />
+        <Marker
+          icon={markerIcon}
+          position={[12.925683599374741, 77.58827189641126]}
         />
       </MapContainer>
     </div>
