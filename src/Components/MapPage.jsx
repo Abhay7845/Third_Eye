@@ -10,31 +10,20 @@ const MapPage = () => {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
   const GetLocation = City.getCitiesOfCountry("IN");
-  console.log("value==>", value);
-  // console.log("latitude==>", latitude);
-  // console.log("longitude==>", longitude);
-
   const location = GetLocation.filter((data) => data.name === value);
-  console.log("location==>", location);
 
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition((position) => {
-  //     setLatitude(position.coords.latitude);
-  //     setLongitude(position.coords.longitude);
-  //   });
-  // }, [latitude, longitude]);
   useEffect(() => {
     location.map((position) => {
       setLatitude(position.latitude);
       setLongitude(position.longitude);
+      return value;
     });
-  }, [latitude, longitude, location]);
+  }, [latitude, longitude, location, value]);
 
   const center = [
     !latitude ? 12.925683599374741 : latitude,
     !longitude ? 77.58827189641126 : longitude,
   ];
-  console.log("center==>", center);
 
   const markerIcon = new L.Icon({
     iconUrl: require("../Img/Location.png"),
