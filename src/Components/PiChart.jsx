@@ -49,7 +49,11 @@ const PiChart = () => {
               dataKey="totalVale"
             >
               {ComponyData.map((entry, i) => (
-                <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                <Cell
+                  key={i}
+                  fill={COLORS[i % COLORS.length]}
+                  style={{ outline: "none" }}
+                />
               ))}
             </Pie>
             <Legend />
