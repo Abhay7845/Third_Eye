@@ -10,7 +10,7 @@ import {
 import { data } from "../Data/DataList";
 
 const PiChart = () => {
-  const COLORS = ["blue", "green"];
+  const COLORS = ["blue", "green", "gray", "red"];
   const turnoverData = data.map((item) => item.turnover);
   const profitData = data.map((item) => item.profit);
 
@@ -24,18 +24,13 @@ const PiChart = () => {
     for (let turnovers of turnoverData) total = total + turnovers;
     return total;
   };
+  const turnover = TotalTurnover();
+  const profit = TotalProfit();
 
-  const TotalProfitTurnover = [TotalProfit(), TotalTurnover()];
-  console.log("TotalProfitTurnover==>", TotalProfitTurnover);
-
-  const TotalProfitTurnoverObj = TotalProfitTurnover.map((elements) => {
-    return {
-      profit: elements,
-      turnover: elements,
-    };
-  });
-  console.log("TotalProfitTurnoverObj==>", TotalProfitTurnoverObj);
-
+  const ComponyData = [
+    { name: "profit", totalVale: profit },
+    { name: "turnover", totalVale: turnover },
+  ];
   return (
     <>
       <div className="mt-2">
@@ -44,14 +39,14 @@ const PiChart = () => {
         <ResponsiveContainer aspect={3} width="100%">
           <PieChart width={400} height={400}>
             <Pie
-              data={TotalProfitTurnoverObj}
+              data={ComponyData}
               labelLine={false}
               cx="50%"
               cy="50%"
               outerRadius={180}
-              dataKey="profit"
+              dataKey="totalVale"
             >
-              {TotalProfitTurnoverObj.map((entry, i) => (
+              {ComponyData.map((entry, i) => (
                 <Cell key={i} fill={COLORS[i % COLORS.length]} />
               ))}
             </Pie>
