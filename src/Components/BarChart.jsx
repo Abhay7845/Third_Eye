@@ -16,7 +16,9 @@ const BarChar = () => {
     <>
       <div className="mt-2">
         <h4 className="text-center my-2 text-danger">Bar Chart Information</h4>
-        <h5 className="text-center mt-2">Company Last 5 Years Performance</h5>
+        <h5 className="text-center mt-2">
+          Company Last 5 Years Performance (IN CR)
+        </h5>
         <ResponsiveContainer aspect={3} width="95%">
           <BarChart width={500} height={300} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
