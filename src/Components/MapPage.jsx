@@ -12,6 +12,11 @@ const MapPage = () => {
   const [longitude, setLongitude] = useState();
   const GetLocation = City.getCitiesOfCountry("IN");
   const location = GetLocation.filter((data) => data.name === value);
+  const center = [
+    !latitude ? 12.925683599374741 : latitude,
+    !longitude ? 77.58827189641126 : longitude,
+  ];
+  const [markerLocation, setMarkerLocation] = useState(center);
 
   useEffect(() => {
     location.map((position) => {
@@ -19,12 +24,7 @@ const MapPage = () => {
       setLongitude(position.longitude);
       return value;
     });
-  }, [latitude, longitude, location, value]);
-
-  const center = [
-    !latitude ? 12.925683599374741 : latitude,
-    !longitude ? 77.58827189641126 : longitude,
-  ];
+  }, [location, value]);
 
   const markerIcon = new L.Icon({
     iconUrl: require("../Img/Location.png"),
@@ -34,6 +34,7 @@ const MapPage = () => {
   });
 
   const GetCurrentLocation = () => {
+    setMarkerLocation(center);
     const { current } = mapRef;
     const { _map } = current.boxZoom;
     _map.flyTo(center, 9, {
@@ -60,10 +61,10 @@ const MapPage = () => {
             })}
           </Select>
         </div>
-        <div className="col-md-1">
+        <div className="d-flex justify-content-end col-md-1">
           <button
             type="button"
-            class="btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm"
             onClick={GetCurrentLocation}
           >
             Search
@@ -91,7 +92,7 @@ const MapPage = () => {
           }}
         />
 
-        <Marker icon={markerIcon} position={center}>
+        <Marker icon={markerIcon} position={markerLocation}>
           {location.map((item, i) => {
             return (
               <Popup key={i}>
