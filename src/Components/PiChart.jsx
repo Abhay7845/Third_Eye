@@ -10,7 +10,7 @@ import {
 import { data } from "../Data/DataList";
 
 const PiChart = () => {
-  const COLORS = ["blue", "green", "gray", "red"];
+  const COLORS = ["blue", "green"];
   const turnoverData = data.map((item) => item.turnover);
   const profitData = data.map((item) => item.profit);
 
@@ -28,8 +28,8 @@ const PiChart = () => {
   const profit = TotalProfit();
 
   const ComponyData = [
-    { name: "profit", totalVale: profit },
-    { name: "turnover", totalVale: turnover },
+    { name: "Turnover", totalVale: turnover },
+    { name: "Profit", totalVale: profit },
   ];
   return (
     <>
