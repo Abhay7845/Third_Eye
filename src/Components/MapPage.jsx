@@ -73,7 +73,7 @@ const MapPage = () => {
           {location.map((item, i) => {
             return (
               <Popup key={i}>
-                <b>City name- {item.name}</b>
+                <b>City Name- {item.name}</b>
                 <br />
                 <b>Country Code- {item.countryCode}</b>
                 <br />
