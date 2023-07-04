@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Polygon, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Polygon, Marker, Popup } from "react-leaflet";
 import { coordinates } from "../Data/CountryCoordinates";
 import { Select } from "antd";
 import L from "leaflet";
@@ -11,7 +11,7 @@ const MapPage = () => {
   const [longitude, setLongitude] = useState();
   const GetLocation = City.getCitiesOfCountry("IN");
   const location = GetLocation.filter((data) => data.name === value);
-
+  console.log("location==>", location);
   useEffect(() => {
     location.map((position) => {
       setLatitude(position.latitude);
@@ -54,6 +54,7 @@ const MapPage = () => {
         center={center}
         zoom={9}
         style={{ width: "100%", height: "90vh" }}
+        scrollWheelZoom={true}
       >
         <TileLayer
           url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=yWf5XdnBxBRhEaDUGS2n"
@@ -69,7 +70,19 @@ const MapPage = () => {
             color: "red",
           }}
         />
-        <Marker icon={markerIcon} position={center} />
+        <Marker icon={markerIcon} position={center}>
+          {location.map((item, i) => {
+            return (
+              <Popup key={i}>
+                <b>City name- {item.name}</b>
+                <br />
+                <b>Country Code- {item.countryCode}</b>
+                <br />
+                <b>State Code- {item.stateCode}</b>
+              </Popup>
+            );
+          })}
+        </Marker>
       </MapContainer>
     </div>
   );
