@@ -74,7 +74,7 @@ const MapPage = () => {
       <MapContainer
         center={center}
         zoom={9}
-        style={{ width: "100%", height: "90vh" }}
+        style={{ width: "100%", height: "78vh" }}
         ref={mapRef}
       >
         <TileLayer
