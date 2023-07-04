@@ -38,8 +38,8 @@ const PiChart = () => {
         <h5 className="text-center mt-2">
           Company Last 5 Years Performance (IN CR)
         </h5>
-        <ResponsiveContainer aspect={3} width="100%">
-          <PieChart width={400} height={400}>
+        <ResponsiveContainer aspect={4} width="100%">
+          <PieChart>
             <Pie
               data={ComponyData}
               labelLine={false}
