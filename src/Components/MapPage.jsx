@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Polygon, Marker, Popup } from "react-leaflet";
 import { coordinates } from "../Data/CountryCoordinates";
 import { Select } from "antd";
@@ -6,6 +6,7 @@ import L from "leaflet";
 import { City } from "country-state-city";
 
 const MapPage = () => {
+  const mapRef = useRef();
   const [value, setValue] = useState("");
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
@@ -32,29 +33,48 @@ const MapPage = () => {
     popupAnchor: [0, -46],
   });
 
+  const GetCurrentLocation = () => {
+    const { current } = mapRef;
+    const { _map } = current.boxZoom;
+    _map.flyTo(center, 9, {
+      duration: 2,
+    });
+  };
+
   return (
     <div className="mx-4">
-      <div className="my-3">
-        <Select
-          placeholder="choose location"
-          className="w-100"
-          showSearch
-          onChange={(value) => setValue(value)}
-        >
-          {GetLocation.map((item, i) => {
-            return (
-              <Select.Option key={i} value={item.name}>
-                {item.name}
-              </Select.Option>
-            );
-          })}
-        </Select>
+      <div className="row my-3 mx-0">
+        <div className="col-md-11">
+          <Select
+            placeholder="choose location"
+            className="w-100"
+            showSearch
+            onChange={(value) => setValue(value)}
+          >
+            {GetLocation.map((item, i) => {
+              return (
+                <Select.Option key={i} value={item.name}>
+                  {item.name}
+                </Select.Option>
+              );
+            })}
+          </Select>
+        </div>
+        <div className="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            onClick={GetCurrentLocation}
+          >
+            Search
+          </button>
+        </div>
       </div>
       <MapContainer
         center={center}
         zoom={9}
         style={{ width: "100%", height: "90vh" }}
-        scrollWheelZoom={true}
+        ref={mapRef}
       >
         <TileLayer
           url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=yWf5XdnBxBRhEaDUGS2n"
@@ -70,6 +90,7 @@ const MapPage = () => {
             color: "red",
           }}
         />
+
         <Marker icon={markerIcon} position={center}>
           {location.map((item, i) => {
             return (
