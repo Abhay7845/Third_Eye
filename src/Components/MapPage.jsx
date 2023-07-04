@@ -11,7 +11,6 @@ const MapPage = () => {
   const [longitude, setLongitude] = useState();
   const GetLocation = City.getCitiesOfCountry("IN");
   const location = GetLocation.filter((data) => data.name === value);
-  console.log("location==>", location);
   useEffect(() => {
     location.map((position) => {
       setLatitude(position.latitude);
