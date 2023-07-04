@@ -45,7 +45,7 @@ const PiChart = () => {
               labelLine={false}
               cx="50%"
               cy="50%"
-              outerRadius={180}
+              outerRadius={100}
               dataKey="totalVale"
             >
               {ComponyData.map((entry, i) => (
