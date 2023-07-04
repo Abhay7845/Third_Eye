@@ -1,66 +1,64 @@
 import React from "react";
-
-import { Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import {
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+} from "recharts";
 import { data } from "../Data/DataList";
 
 const PiChart = () => {
   const COLORS = ["blue", "green"];
+  const turnoverData = data.map((item) => item.turnover);
+  const profitData = data.map((item) => item.profit);
 
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
+  const TotalProfit = () => {
+    let total = 0;
+    for (let profits of profitData) total = total + profits;
+    return total;
   };
+  const TotalTurnover = () => {
+    let total = 0;
+    for (let turnovers of turnoverData) total = total + turnovers;
+    return total;
+  };
+
+  const TotalProfitTurnover = [TotalProfit(), TotalTurnover()];
+  console.log("TotalProfitTurnover==>", TotalProfitTurnover);
+
+  const TotalProfitTurnoverObj = TotalProfitTurnover.map((elements) => {
+    return {
+      profit: elements,
+      turnover: elements,
+    };
+  });
+  console.log("TotalProfitTurnoverObj==>", TotalProfitTurnoverObj);
 
   return (
     <>
       <div className="mt-2">
         <h4 className="text-center my-2 text-danger">PI Chart Information</h4>
         <h5 className="text-center mt-2">Company Last 5 Years Performance</h5>
-        <ResponsiveContainer aspect={3} width="95%">
+        <ResponsiveContainer aspect={3} width="100%">
           <PieChart width={400} height={400}>
             <Pie
-              data={data}
+              data={TotalProfitTurnoverObj}
+              labelLine={false}
               cx="50%"
               cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
               outerRadius={180}
-              fill="#8884d8"
-              dataKey="turnover"
+              dataKey="profit"
             >
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
+              {TotalProfitTurnoverObj.map((entry, i) => (
+                <Cell key={i} fill={COLORS[i % COLORS.length]} />
               ))}
             </Pie>
+            <Legend />
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>
-
-        <h6 className="text-center">- Data Showing IN YEAR -</h6>
       </div>
     </>
   );
