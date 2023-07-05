@@ -35,15 +35,15 @@ const MapPage = () => {
     setMarkerLocation(center);
     const { current } = mapRef;
     const { _map } = current.boxZoom;
-    _map.flyTo(center, 11, {
+    _map.flyTo(center, 11.4, {
       duration: 2,
     });
   };
 
   return (
     <div className="mx-4">
-      <div className="row my-3 mx-0">
-        <div className="col-md-11">
+      <div className="row my-2 mx-0">
+        <div className="col-5">
           <Select
             placeholder="choose location"
             className="w-100"
@@ -59,7 +59,7 @@ const MapPage = () => {
             })}
           </Select>
         </div>
-        <div className="d-flex justify-content-end col-md-1">
+        <div className="d-flex justify-content-between col-1">
           <button
             type="button"
             className="btn btn-primary btn-sm"
@@ -71,8 +71,8 @@ const MapPage = () => {
       </div>
       <MapContainer
         center={center}
-        zoom={11}
-        style={{ width: "100%", height: "78vh" }}
+        zoom={11.4}
+        style={{ width: "100%", height: "81vh" }}
         ref={mapRef}
       >
         <TileLayer
