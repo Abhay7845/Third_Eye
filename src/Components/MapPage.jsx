@@ -37,7 +37,7 @@ const MapPage = () => {
     setMarkerLocation(center);
     const { current } = mapRef;
     const { _map } = current.boxZoom;
-    _map.flyTo(center, 9, {
+    _map.flyTo(center, 11, {
       duration: 2,
     });
   };
