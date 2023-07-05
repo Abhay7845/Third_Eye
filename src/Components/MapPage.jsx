@@ -28,9 +28,7 @@ const MapPage = () => {
 
   const markerIcon = new L.Icon({
     iconUrl: require("../Img/Location.png"),
-    iconSize: [40, 40],
-    iconAnchor: [17, 46],
-    popupAnchor: [0, -46],
+    iconSize: [35, 35],
   });
 
   const GetCurrentLocation = () => {
