@@ -1,5 +1,41 @@
 export const data = [
   {
+    year: "2005",
+    profit: 3980,
+    turnover: 5230,
+    amt: 2970,
+  },
+  {
+    year: "2006",
+    profit: 4340,
+    turnover: 8090,
+    amt: 2320,
+  },
+  {
+    year: "2007",
+    profit: 1900,
+    turnover: 3240,
+    amt: 2451,
+  },
+  {
+    year: "2008",
+    profit: 2800,
+    turnover: 5700,
+    amt: 2000,
+  },
+  {
+    year: "2009",
+    profit: 1800,
+    turnover: 2290,
+    amt: 2150,
+  },
+  {
+    year: "2010",
+    profit: 6900,
+    turnover: 8200,
+    amt: 2100,
+  },
+  {
     year: "2011",
     profit: 900,
     turnover: 2400,
@@ -8,7 +44,7 @@ export const data = [
   {
     year: 2012,
     profit: 3000,
-    turnover: 1398,
+    turnover: 6398,
     amt: 2210,
   },
   {
