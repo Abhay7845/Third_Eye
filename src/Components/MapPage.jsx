@@ -42,7 +42,7 @@ const MapPage = () => {
 
   return (
     <div className="mx-4">
-      <div className="row my-2 mx-0">
+      <div className="row my-2">
         <div className="col-5">
           <Select
             placeholder="choose location"
