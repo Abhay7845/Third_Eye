@@ -16,10 +16,10 @@ const Login = () => {
 
   useEffect(() => {
     // Initialize MSAL instance
-    const msalInstance = new PublicClientApplication(msalConfig);
-    console.log("msalInstance==>", msalInstance);
-    setMsalInstance(msalInstance);
+    const configInstance = new PublicClientApplication(msalConfig);
+    setMsalInstance(configInstance);
   }, []);
+  console.log("msalInstance==>", msalInstance);
 
   const login = async () => {
     try {
