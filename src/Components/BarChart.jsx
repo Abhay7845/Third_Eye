@@ -13,7 +13,7 @@ import { data } from "../Data/DataList";
 
 const BarChar = () => {
   return (
-    <>
+    <div>
       <div className="mt-2">
         <h4 className="text-center my-2 text-danger">Bar Chart Information</h4>
         <h5 className="text-center mt-2">Company Performance (IN CR)</h5>
@@ -30,7 +30,7 @@ const BarChar = () => {
         </ResponsiveContainer>
         <h6 className="text-center">- Data Showing IN YEAR -</h6>
       </div>
-    </>
+    </div>
   );
 };
 

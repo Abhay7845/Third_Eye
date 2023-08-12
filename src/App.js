@@ -1,18 +1,18 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
-import Navbar from "./Components/Navbar";
 import MapPage from "./Components/MapPage";
 import BarChar from "./Components/BarChart";
 import PiChart from "./Components/PiChart";
 import "leaflet/dist/leaflet.css";
+import Login from "./Components/Login";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
-        <Route index element={<Home />} />
+        <Route index element={<Login />} />
+        <Route index path="/login" element={<Login />} />
         <Route index path="/lineChart" element={<Home />} />
         <Route index path="/barChart" element={<BarChar />} />
         <Route index path="/piChart" element={<PiChart />} />

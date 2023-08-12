@@ -10,10 +10,12 @@ import {
   Line,
 } from "recharts";
 import { data } from "../Data/DataList";
+import { Navbar } from "reactstrap";
 
 const Home = () => {
   return (
-    <>
+    <div>
+      <Navbar />
       <div>
         <h4 className="text-center my-2 text-danger">Line Chart Information</h4>
         <h5 className="text-center mt-2">Company Performance (IN CR)</h5>
@@ -40,7 +42,7 @@ const Home = () => {
         </ResponsiveContainer>
         <h6 className="text-center">- Data Showing IN YEAR -</h6>
       </div>
-    </>
+    </div>
   );
 };
 
