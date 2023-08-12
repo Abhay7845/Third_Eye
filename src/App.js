@@ -6,6 +6,7 @@ import BarChar from "./Components/BarChart";
 import PiChart from "./Components/PiChart";
 import "leaflet/dist/leaflet.css";
 import Login from "./Components/Login";
+import "./App.css";
 
 const App = () => {
   return (
