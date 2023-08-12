@@ -35,7 +35,8 @@ const Login = () => {
     <div className="LoginPage">
       <div>
         <button className="LoginBtn" onClick={login}>
-          <img src={micIcon} width="25" alt="micIcon" /> Login With Microsoft
+          <img src={micIcon} width="23" alt="micIcon" />
+          <span className="mx-3 mt-3">Sign in With Microsoft</span>
         </button>
       </div>
     </div>

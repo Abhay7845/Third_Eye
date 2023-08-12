@@ -8,7 +8,12 @@
 
 .LoginBtn{
   border: none;
-  padding: 5px;
-  border-radius: 2px;
+  padding: 6px;
   outline: none;
+  background-color: #f2f0f0;
+  border: 1px solid #c3c1c1;
+}
+
+.LoginBtn:hover{
+  background-color: #e3e0e0;
 }
