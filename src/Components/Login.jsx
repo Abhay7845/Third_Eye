@@ -1,3 +1,5 @@
+// /* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useState, useEffect } from "react";
 import { PublicClientApplication } from "@azure/msal-browser";
 import micIcon from "../Img/mic-icon.png";
